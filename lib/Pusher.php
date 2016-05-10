@@ -533,7 +533,8 @@ class Pusher
         $this->validate_channel($channel);
         $this->validate_socket_id($socket_id);
 
-        if ($custom_data === true) {
+        if ($custom_data != false
+            AND is_string($custum_data)) {
             $signature = hash_hmac('sha256', $socket_id.':'.$channel.':'.$custom_data, $this->settings['secret'], false);
         } else {
             $signature = hash_hmac('sha256', $socket_id.':'.$channel, $this->settings['secret'], false);
